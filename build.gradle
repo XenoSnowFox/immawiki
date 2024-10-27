@@ -25,7 +25,8 @@ repositories {
 }
 
 allprojects {
-    group = "com.xenosnowfox.immawiki"
+    group = rootProject.group
+    version = rootProject.version
 
     repositories {
         mavenCentral()

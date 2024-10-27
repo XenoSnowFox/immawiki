@@ -8,3 +8,4 @@
 deploy/
 target/
 build/
+cdk.out/
