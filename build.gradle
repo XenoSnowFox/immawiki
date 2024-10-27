@@ -4,7 +4,7 @@ plugins {
     id "io.miret.etienne.sass" version "1.4.2" // SASS Compiler
 
     // Formatting
-    id "checkstyle"
+    id 'com.diffplug.spotless' version "6.25.0"
 
     // Code Coverage
     id "jacoco"
@@ -37,6 +37,9 @@ allprojects {
 
 subprojects {
     apply plugin: "java"
+    apply plugin: "jacoco"
+    apply plugin: "com.diffplug.spotless"
+    apply plugin: "com.adarshr.test-logger"
 
     project.buildDir(new File(rootProject.projectDir, "build/modules/" + project.name))
 
@@ -61,28 +64,35 @@ subprojects {
         testImplementation "org.junit.jupiter:junit-jupiter-params:5.11.1"
     }
 
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 
-}
-
-checkstyle {
-    toolVersion = "8.29"
-    configFile = file("./checkstyle.xml")
-    // Allow some warnings before putting checkstyle in place. These warnings will be gradually removed.
-    maxWarnings = 43
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-
-jacoco {
-    toolVersion = "0.8.12"
+    jacoco {
+        toolVersion = "0.8.12"
 //	reportsDir = file("$buildDir/jacoco")
-}
+    }
 
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport // report is always generated after tests run
+    test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport // report is always generated after tests run
+    }
+
+
+    compileJava {
+        dependsOn "spotlessApply"
+    }
+
+    spotless {
+        java {
+            importOrder()
+            removeUnusedImports()
+            googleJavaFormat().reflowLongStrings()
+            formatAnnotations()
+        }
+        format("styling") {
+            target("src/*/sass/**/*.css", "src/*/sass/**/*.scss")
+        }
+    }
 }

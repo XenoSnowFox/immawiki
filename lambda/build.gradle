@@ -16,6 +16,7 @@ subprojects {
 	dependencies {
 		// AWS Lambda Handler
 		implementation "com.amazonaws:aws-lambda-java-core:1.2.3"
+		implementation "com.amazonaws:aws-lambda-java-events:3.14.0"
 
 		// AWS SDK and Bill of Materials
 		implementation platform("software.amazon.awssdk:bom:2.28.12")
