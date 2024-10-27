@@ -1,0 +1,88 @@
+plugins {
+    // Compiling
+    id "java"
+    id "io.miret.etienne.sass" version "1.4.2" // SASS Compiler
+
+    // Formatting
+    id "checkstyle"
+
+    // Code Coverage
+    id "jacoco"
+
+    // Testing
+    id "info.solidsoft.pitest" version "1.9.11" // Mutation Testing
+    id "com.adarshr.test-logger" version "4.0.0" // Test Logger
+}
+
+group = "com.xenosnowfox.immawiki"
+version = "0.0.0"
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://s3-us-west-2.amazonaws.com/dynamodb-local/release"
+    }
+}
+
+allprojects {
+    group = "com.xenosnowfox.immawiki"
+
+    repositories {
+        mavenCentral()
+        maven {
+            url = "https://s3-us-west-2.amazonaws.com/dynamodb-local/release"
+        }
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+
+    project.buildDir(new File(rootProject.projectDir, "build/modules/" + project.name))
+
+    dependencies {
+
+        // Jackson Data Modules
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.18.0"
+        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.1"
+        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1"
+        implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.1"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.0"
+
+        // project lombok
+        compileOnly "org.projectlombok:lombok:1.18.34"
+        annotationProcessor "org.projectlombok:lombok:1.18.34"
+        testCompileOnly "org.projectlombok:lombok:1.18.34"
+        testAnnotationProcessor "org.projectlombok:lombok:1.18.34"
+
+        // JUnit5 Testing Dependencies
+        testImplementation "org.junit.jupiter:junit-jupiter-api:5.11.1"
+        testImplementation "org.junit.jupiter:junit-jupiter-engine:5.11.1"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:5.11.1"
+    }
+
+
+}
+
+checkstyle {
+    toolVersion = "8.29"
+    configFile = file("./checkstyle.xml")
+    // Allow some warnings before putting checkstyle in place. These warnings will be gradually removed.
+    maxWarnings = 43
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+jacoco {
+    toolVersion = "0.8.12"
+//	reportsDir = file("$buildDir/jacoco")
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
