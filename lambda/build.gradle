@@ -12,6 +12,8 @@ subprojects {
 	apply plugin: "java-library"
 	apply plugin: "com.github.johnrengelman.shadow"
 
+	project.buildDir(new File(rootProject.projectDir, "build/modules/lambda-" + project.name))
+
 	dependencies {
 		// AWS Lambda Handler
 		implementation "com.amazonaws:aws-lambda-java-core:1.2.3"
@@ -20,11 +22,6 @@ subprojects {
 		// AWS SDK and Bill of Materials
 		implementation platform("software.amazon.awssdk:bom:2.28.12")
 		//	implementation 'software.amazon.awssdk:dynamodb'
-	}
-
-	java {
-		sourceCompatibility = JavaVersion.VERSION_21
-		targetCompatibility = JavaVersion.VERSION_21
 	}
 
 	shadowJar {

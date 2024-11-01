@@ -1,0 +1,38 @@
+
+@mixin apply {
+    background: var(--iw-surface-color-default);
+    color: var(--iw-on-surface-color-default);
+    fill: var(--iw-on-surface-color-default);
+}
+
+@mixin background {
+    --iw-surface-color-default: var(--iw-palette-gray10);
+    --iw-surface-color-hover: var(--iw-palette-gray20);
+    --iw-surface-color-muted: var(--iw-palette-gray30);
+    --iw-on-surface-color-default:  var(--iw-palette-gray60);
+    --iw-on-surface-color-hover: var(--iw-palette-black);
+    --iw-on-surface-color-muted:  var(--iw-palette-gray50);
+    --iw-on-surface-accent-default:  var(--iw-palette-blue40);
+    --iw-on-surface-accent-muted:  var(--iw-palette-blue20);
+    --iw-on-surface-accent-hover:  var(--iw-palette-blue60);
+    --iw-on-surface-border-default:  var(--iw-palette-gray20);
+    --iw-on-surface-border-hover:  var(--iw-palette-black);
+    --iw-on-surface-border-active:  var(--iw-palette-blue40);
+    @include apply;
+}
+
+@mixin article {
+    --iw-surface-color-default: var(--iw-palette-white);
+    --iw-surface-color-hover: var(--iw-palette-gray10);
+    --iw-surface-color-muted: var(--iw-palette-gray20);
+    --iw-on-surface-color-default:  var(--iw-palette-gray60);
+    --iw-on-surface-color-hover: var(--iw-palette-black);
+    --iw-on-surface-color-muted:  var(--iw-palette-gray50);
+    --iw-on-surface-accent-default:  var(--iw-palette-blue40);
+    --iw-on-surface-accent-muted:  var(--iw-palette-blue20);
+    --iw-on-surface-accent-hover:  var(--iw-palette-blue60);
+    --iw-on-surface-border-default:  var(--iw-palette-gray20);
+    --iw-on-surface-border-hover:  var(--iw-palette-black);
+    --iw-on-surface-border-active:  var(--iw-palette-blue40);
+    @include apply;
+}

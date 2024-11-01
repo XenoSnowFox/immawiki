@@ -1,4 +1,4 @@
-package com.xenosnowfox.immawiki;
+package com.xenosnowfox.immawiki.lambda.homepageretrieval;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;

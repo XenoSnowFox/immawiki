@@ -1,0 +1,142 @@
+@use "./mixins/surfaces" as surfaces;
+
+* {
+	box-sizing: border-box;
+	color: inherit;
+	fill: inherit;
+
+    line-height: 125%;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, a,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, main, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:inherit;
+    font-weight:inherit;
+    vertical-align:baseline;
+    background:transparent;
+	color:inherit;
+
+    -webkit-background-clip: padding-box;
+    -moz-background-clip:    padding;
+    background-clip:         padding-box;
+}
+
+html, body {
+	font-family: noto-serif-regular;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: greyscale;
+	letter-spacing: 0.02rem;
+
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+
+	-webkit-appearance:none;
+
+	@include surfaces.background;
+
+    @media print {
+        font-size: 10pt;
+    }
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+	display:block;
+}
+
+ul, ol {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+	text-decoration:none;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+	font-family: "Roboto", sans-serif;
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-weight:bold;
+	font-family: "Roboto", sans-serif;
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+/* CLEARFIX GROUP */
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+	}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
+
+svg {
+	fill: inherit;
+}
+
+* html .v3-cFormField > legend             { zoom: 1; } /* IE6 */
+*:first-child+html .v3-cFormField > legend { zoom: 1; } /* IE7 */
+
+@media not print {
+    .print-only {
+        display: none;
+    }
+}
+
+@media not screen {
+    .screen-only {
+        display: none;
+    }
+}

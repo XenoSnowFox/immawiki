@@ -1,6 +1,8 @@
 package com.xenosnowfox.immawiki;
 
 import com.xenosnowfox.immawiki.api.ApiStack;
+import com.xenosnowfox.immawiki.config.DeploymentProperties;
+import com.xenosnowfox.immawiki.config.SiteProperties;
 import java.io.IOException;
 import software.amazon.awscdk.App;
 
@@ -29,16 +31,11 @@ public class Application {
   }
 
   private static void synth(final App app) throws IOException {
-    String email = (String) app.getNode().tryGetContext("email");
-    boolean deployPackagingApi = "true".equals(app.getNode().tryGetContext("deployPackagingApi"));
-
     new ApiStack(
         app,
-        "DeliveryProject-Api",
+        DeploymentProperties.IDENTIFIER.getValue() + "-stack",
         ApiStack.ApiStackProps.builder()
-            .description("API of Delivery project (uksb-1rsq7ledu)")
-            .alertEmail(email)
-            .deployPackagingApi(deployPackagingApi)
+            .description(SiteProperties.IMMAWIKI_SITE_NAME.getValue() + " Application Stack")
             .build());
   }
 }

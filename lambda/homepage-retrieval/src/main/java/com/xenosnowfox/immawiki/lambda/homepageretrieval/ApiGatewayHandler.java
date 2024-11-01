@@ -1,14 +1,14 @@
-package com.xenosnowfox.immawiki;
+package com.xenosnowfox.immawiki.lambda.homepageretrieval;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.xenosnowfox.immawiki.library.thymeleafutilities.TemplateEngineFactory;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ApiGatewayHandler
     implements RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse> {
@@ -19,30 +19,28 @@ public class ApiGatewayHandler
   @Override
   public APIGatewayV2HTTPResponse handleRequest(
       final APIGatewayV2HTTPEvent event, final Context context) {
-    LambdaLogger logger = context.getLogger();
+
     APIGatewayV2HTTPResponse response = new APIGatewayV2HTTPResponse();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
-    HashMap<String, String> headers = new HashMap<String, String>();
+
+    HashMap<String, String> headers = new HashMap<>();
     headers.put("Content-Type", "text/html");
     response.setHeaders(headers);
+
     try {
-      response.setBody(
-          "<!DOCTYPE html><html><head><title>Hello World</title></head><body>"
-              + "<h1>Hello World</h1>"
-              + "<p>ENVIRONMENT: <pre>"
-              + OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(System.getenv())
-              + "</pre></p>"
-              + "<p>CONTEXT: <pre>"
-              + OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(context)
-              + "</pre></p>"
-              + "<p>EVENT: <pre>"
-              + OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(event)
-              + "</pre></p>"
-              + "</body></html>");
-    } catch (JsonProcessingException e) {
-      throw new RuntimeException(e);
+      final Map<String, Object> contextMap = new HashMap<>();
+      contextMap.put("url", new UrlFormatter(event.getStageVariables()));
+      contextMap.putAll(event.getStageVariables());
+
+      final String html = TemplateEngineFactory.parse("homepage", contextMap);
+      response.setBody(html);
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      ex.printStackTrace();
+      throw ex;
     }
+
     Util.logEnvironment(event, context);
     return response;
   }

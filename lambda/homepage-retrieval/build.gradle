@@ -1,0 +1,4 @@
+
+dependencies {
+	implementation(project(":library:thymeleaf-utilities"))
+}

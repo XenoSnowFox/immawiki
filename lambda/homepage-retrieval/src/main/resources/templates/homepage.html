@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${IMMAWIKI_SITE_NAME}"></title>
+    <th:block th:replace="~{fragments/core :: meta}" />
+    <th:block th:replace="~{fragments/core :: stylesheets}" />
+</head>
+<body>
+    <th:block th:replace="~{fragments/site :: header}" />
+    <h1 th:text="${IMMAWIKI_HOMEPAGE_TITLE}"></h1>
+    <th:block th:replace="~{fragments/site :: footer}" />
+</body>
+</html>

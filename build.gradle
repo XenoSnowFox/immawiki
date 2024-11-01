@@ -16,6 +16,7 @@ plugins {
 
 group = "com.xenosnowfox.immawiki"
 version = "0.0.0"
+defaultTasks "spotlessApply", "clean", "compileSass", "copyFonts", "shadowJar"
 
 repositories {
     mavenCentral()
@@ -27,6 +28,11 @@ repositories {
 allprojects {
     group = rootProject.group
     version = rootProject.version
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 
     repositories {
         mavenCentral()
@@ -65,11 +71,6 @@ subprojects {
         testImplementation "org.junit.jupiter:junit-jupiter-params:5.11.1"
     }
 
-    java {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
     jacoco {
         toolVersion = "0.8.12"
 //	reportsDir = file("$buildDir/jacoco")
@@ -97,3 +98,27 @@ subprojects {
         }
     }
 }
+
+
+sass {
+//    version = '1.26.10'
+    version = '1.80.4'
+    directory = file ("${rootDir}/.gradle/sass")
+    baseUrl = 'https://github.com/sass/dart-sass/releases/download'
+}
+
+compileSass {
+    outputDir = project.file ("${projectDir}/build/modules/immawiki-static-resources/styles/")
+    sourceDir = project.file ("${projectDir}/sass")
+    style = compressed
+    noCharset ()
+    noErrorCss ()
+    sourceMap = none
+    sourceMapUrls = relative
+}
+
+task copyFonts(type: Copy) {
+    from 'fonts'
+    into 'build/modules/immawiki-static-resources/fonts'
+}
+compileJava.dependsOn copyFonts

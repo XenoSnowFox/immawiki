@@ -1,0 +1,27 @@
+
+plugins {
+	id "java-library"
+	id "com.github.johnrengelman.shadow" version "7.1.2" // Uber-JAR builder
+}
+
+jar {
+	enabled = false
+}
+
+subprojects {
+	apply plugin: "java-library"
+	apply plugin: "com.github.johnrengelman.shadow"
+
+	project.buildDir(new File(rootProject.projectDir, "build/modules/library-" + project.name))
+
+	dependencies {
+
+
+	}
+
+	shadowJar {
+		archiveBaseName.set('immawiki')
+		archiveClassifier.set(project.name)
+		archiveVersion.set('')
+	}
+}

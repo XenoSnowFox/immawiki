@@ -1,4 +1,4 @@
 rootProject.name = "immawiki"
 
 // Lambda Functions
-include "cdk", "lambda:homepage-retrieval"
+include "cdk", "lambda:homepage-retrieval", "library:thymeleaf-utilities"

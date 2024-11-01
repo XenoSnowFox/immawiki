@@ -1,0 +1,84 @@
+@use "./mixins/surfaces" as surfaces;
+
+@font-face {
+   font-family: noto-serif-regular;
+   src: url(../fonts/noto-serif-regular.ttf);
+}
+
+@font-face {
+   font-family: noto-serif-italic;
+   src: url(../fonts/noto-serif-italic.ttf);
+}
+
+:root {
+    // HORIZONTAL SPACING
+    // Between Cards: Cards are self contained blocks.
+    --iw-spacing-horizontal-between-cards: 0.75rem;
+    // Between Chips: Chips allows you to filter content and are typically placed close to each other.
+    --iw-spacing-horizontal-between-chips: 0.5rem;
+    // Screen Edge: The overarching spacing between the edge of the screen/window and our content.
+    --iw-spacing-horizontal-screen-edge: 1.5rem;
+    // Component Default: When no specific spacing token exists. Between buttons etc.
+    --iw-spacing-horizontal-component-default: 1rem;
+
+    // VERTICAL SPACING
+    // Between Text: Text is any copy that isn't using a display style.
+    --iw-spacing-vertical-between-text: 0.5rem;
+    // Image Bottom: Extra breathing room below hero graphics.
+    --iw-spacing-vertical-image-bottom: 0.5rem;
+    // Display Text Bottom: Additional spacing underneath display text.
+    --iw-spacing-vertical-display-text-bottom: 1rem;
+    // Text To Component: Between any non-display text and a component.
+    --iw-spacing-vertical-text-to-component: 1rem;
+    // Content To Button: When a button is displayed directly after content and not in a footer.
+    --iw-spacing-vertical-content-to-button: 1.5rem;
+    // Between Sections: Separate groups of content to show that are not directly connected.
+    --iw-spacing-vertical-between-sections: 2rem;
+    // Between Options: Options have a large tough area and hence have this spacing already incorporated.
+    --iw-spacing-vertical-between-options: 0rem;
+    // Component Default: When no specific spacing token exists. Below section headers, between form fields, between buttons etc.
+    --iw-spacing-vertical-component-default: 1rem;
+
+    // PALETTE COLORS
+    --iw-palette-black: #000;
+    --iw-palette-gray90: #141414;
+    --iw-palette-gray80: #1f1f1f;
+    --iw-palette-gray70: #333;
+    --iw-palette-gray60: #545454;
+    --iw-palette-gray50: #757575;
+    --iw-palette-gray40: #afafaf;
+    --iw-palette-gray30: #cbcbcb;
+    --iw-palette-gray20: #e2e2e2;
+    --iw-palette-gray10: #eee;
+    --iw-palette-gray05: #f6f6f6;
+    --iw-palette-white: #fff;
+    --iw-palette-blue70: #0f2358;
+    --iw-palette-blue60: #1a3c97;
+    --iw-palette-blue50: #1f4cc0;
+    --iw-palette-blue40: #4272ef; // primary accent color
+    --iw-palette-blue30: #5ab8ff;
+    --iw-palette-blue20: #a4bdfd;
+    --iw-palette-blue10: #cad9ff;
+    --iw-palette-blue05: #eaf0ff;
+    --iw-palette-magenta-regular: #EE5D94;
+    --iw-palette-magenta-dense: #EB367D;
+    --iw-palette-peach-regular: #F79C87;
+    --iw-palette-peach-dense: #FA8573;
+    --iw-palette-yellow-regular: #FED142;
+    --iw-palette-yellow-dense: #FFC212;
+    --iw-palette-tosca-regular: #3AB8B4;
+    --iw-palette-tosca-dense: #03A7A6;
+
+    // SURFACE TOKENS
+	@include surfaces.background;
+//     --iw-surface-color-default: var(--iw-palette-white);
+//     --iw-surface-color-muted: var(--iw-palette-gray10);
+//     --iw-on-surface-color-default: var(--iw-palette-black);
+//     --iw-on-surface-color-variant:  var(--iw-palette-gray60);
+//     --iw-on-surface-color-muted:  var(--iw-palette-gray50);
+//     --iw-on-surface-accent-default:  var(--iw-palette-blue40);
+//     --iw-on-surface-accent-muted:  var(--iw-palette-blue20);
+//     --iw-on-surface-border-default:  var(--iw-palette-gray20);
+//     --iw-on-surface-border-hover:  var(--iw-palette-black);
+//     --iw-on-surface-border-active:  var(--iw-palette-blue40);
+}

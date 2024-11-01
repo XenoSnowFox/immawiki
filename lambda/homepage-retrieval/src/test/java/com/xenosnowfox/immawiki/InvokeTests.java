@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse;
+import com.xenosnowfox.immawiki.lambda.homepageretrieval.ApiGatewayHandler;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
